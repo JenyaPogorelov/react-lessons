@@ -1,6 +1,6 @@
 const MyComponent = (props) => {
     console.log('props', props);
-    return <div>{props.textToShow}</div>;
+    return <div className="mainInput">{props.textToShow}</div>;
 
 }
 
