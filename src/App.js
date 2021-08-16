@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './App.css';
 import InputComponent from "./InputComponent";
 import ButtonComponent from "./ButtonComponent";
@@ -11,28 +11,28 @@ function App() {
     const [messagesArray, setMessagesArray] = useState([]);
     const [author, setAuthor] = useState('');
 
-    // console.log(messagesArray);
-
     const onSendMessage = () => {
         console.log(messagesArray)
         if (inputMessage) {
             setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: author}])
-            setTimeout(function() {
-                setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: 'робот'}])
-            }, 1500);
-
-            setInputMessage('')
         }   else {
             console.log('Введите сообщение');
         }
-
     }
+
+    useEffect(() => {
+        if (inputMessage) {
+            setInputMessage('')
+            setTimeout(function() {
+                setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: 'робот'}])
+            }, 1500);
+        }
+    }, [messagesArray])
 
     return <div className='mainWrapper'>
         <div className='messageList'>
             {
                 messagesArray.map((message, index) => (
-                    // <div key={index}>{index}</div>
                 <MessageListComponent
                     key={index}
                     message={message}

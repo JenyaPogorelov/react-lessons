@@ -1,8 +1,8 @@
 const MessageListComponent = (props) => {
     return (
-        <div>
-            <div>{props.message.author}</div>
-            <div>{props.message.textMessage}</div>
+        <div className='messageBox'>
+            <div className='messageBox__author' >{props.message.author}</div>
+            <div className='messageBox__message' >{props.message.textMessage}</div>
         </div>
 
     )
