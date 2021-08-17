@@ -1,6 +1,6 @@
 const InputComponent = (props) => {
     return (
-        <input
+        <textarea
             placeholder='Ввведите текст сообщения'
             className='input'
             value={props.value}

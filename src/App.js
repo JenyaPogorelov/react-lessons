@@ -12,8 +12,7 @@ function App() {
     const [author, setAuthor] = useState('');
 
     const onSendMessage = () => {
-        console.log(messagesArray)
-        if (inputMessage) {
+        if (inputMessage && author) {
             setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: author}])
         }   else {
             console.log('Введите сообщение');
@@ -21,9 +20,10 @@ function App() {
     }
 
     useEffect(() => {
-        if (inputMessage) {
+        if (inputMessage && author) {
             setInputMessage('')
             setTimeout(function() {
+                setInputMessage('')
                 setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: 'робот'}])
             }, 1500);
         }
@@ -42,19 +42,22 @@ function App() {
         </div>
 
         <div className="inputWrapper">
-            <InputAuthorComponent
-                value={author}
-                onChange={setAuthor}
-                onKeyDown={onSendMessage}
-            />
             <InputComponent
                 value={inputMessage}
                 onChange={setInputMessage}
                 onKeyDown={onSendMessage}
             />
-            <ButtonComponent
-                onClick={onSendMessage}
-            />
+            <div className='inputWrapper__buttonAuthor'>
+                <InputAuthorComponent
+                    value={author}
+                    onChange={setAuthor}
+                    onKeyDown={onSendMessage}
+                />
+                <ButtonComponent
+                    onClick={onSendMessage}
+                />
+            </div>
+
         </div>
 
     </div>
