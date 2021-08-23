@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,17 +12,21 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const ButtonComponent = (props) => {
+const ButtonComponent = ({onClick}) => {
     const classes = useStyles();
     return (
         <Button
             classes={{
                 root: classes.button
             }}
-            onClick={() => {props.onClick()}}
+            onClick={() => {onClick()}}
             color="primary"
         >Отправить</Button>
     )
+}
+
+ButtonComponent.propTypes = {
+    onClick: PropTypes.func.isRequired,
 }
 
 export default ButtonComponent;

@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import ArrayChats from "./ArrayChats";
 
 const useStyles = makeStyles((theme) => ({
     messageBox: {
@@ -21,15 +23,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const MessageBoxComponent = (props) => {
+const MessageBoxComponent = ({message}) => {
     const classes = useStyles();
     return (
         <div className={classes.messageBox}>
-            <div className={classes.author} >{props.message.author}</div>
-            <div className={classes.message} >{props.message.textMessage}</div>
+            <div className={classes.author} >{message.author}</div>
+            <div className={classes.message} >{message.textMessage}</div>
         </div>
 
     )
+}
+
+ArrayChats.propTypes = {
+    message: PropTypes.array,
 }
 
 export default MessageBoxComponent;

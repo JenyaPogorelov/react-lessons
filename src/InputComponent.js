@@ -1,4 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const InputComponent = (props) => {
+const InputComponent = ({onKeyDown, onChange, value}) => {
     const classes = useStyles();
     return (
         <TextField
@@ -27,11 +28,20 @@ const InputComponent = (props) => {
             }}
 
             autoFocus={true}
-            value={props.value}
-            onChange={event => props.onChange(event.target.value)}
-            onKeyDown={({key}) => {if (key === 'Enter') {props.onKeyDown()}}}
+            value={value}
+            onChange={event => onChange(event.target.value)}
+            onKeyDown={({key}) => {
+                if (key === 'Enter') {
+                    onKeyDown()
+                }
+            }}
         />
     )
 }
 
+InputComponent.propTypes = {
+    onKeyDown: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+}
 export default InputComponent;
