@@ -3,6 +3,7 @@ import Home from "./Home";
 import Chat from "./Chat";
 import Playground from "./Playground";
 import AppBar from "./AppBar";
+import Profile from "./Profile";
 
 
 
@@ -15,6 +16,9 @@ const App = () => {
             </Route>
             <Route path="/playground">
                 <Playground />
+            </Route>
+            <Route path="/profile">
+                <Profile />
             </Route>
             <Route path="/">
                 <Home />

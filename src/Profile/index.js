@@ -7,10 +7,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Playground = () => {
+const Profile = () => {
     const classes = useStyles();
 
-    return <div className={classes.testBlock}>Plauground</div>
+    return <div className={classes.testBlock}>Страница пользователя</div>
 }
 
-export default Playground;
+export default Profile;
