@@ -45,10 +45,11 @@ const ArrayChats = (props) => {
 
     const deleteChat = (event) => {
         // const delIndex = chatList.indexOf(chatList.find((element, index) => index === +event));
-        console.log(chatList.filter((element, index) => index ==! +event))
-        // setChatList(prevState => {
-        //     prevState.splice(1, 1);
-        // })
+        const delIndex = chatList.filter((element, index) => index !== +event);
+        console.log(delIndex)
+        setChatList(prevState => {
+            prevState = chatList.filter((element, index) => index !== +event);
+        })
         // setChatList(chatList.splice(delIndex, 1))
         // setChatList(prevState => [...prevState, prevState.splice(delIndex, 1)])
         // console.log(chatList)
