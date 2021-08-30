@@ -50,8 +50,7 @@ function Chat() {
     const [inputMessage, setInputMessage] = useState('');
     const [author, setAuthor] = useState('Anonymous');
 
-    const {messagesArray} = useSelector((state) => state.chat
-    );
+    const {messagesArray} = useSelector((state) => state.chat);
 
     const classes = useStyles();
     const dispatch = useDispatch();
