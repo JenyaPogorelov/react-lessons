@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
 import {addMessage} from "./chatSlice";
 import '../App.css';
 import InputComponent from "./InputComponent";
@@ -51,6 +51,7 @@ function Chat() {
     const [author, setAuthor] = useState('Anonymous');
 
     const {messagesArray} = useSelector((state) => state.chat);
+    const {authorName} = useSelector((state) => state.profile);
 
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function Chat() {
     const onSendMessage = () => {
 
         if (inputMessage && author) {
-            dispatch(addMessage({textMessage: inputMessage, author: author}))
+            dispatch(addMessage({textMessage: inputMessage, author: authorName}))
         } else {
             console.log('Введите сообщение');
         }
@@ -96,7 +97,7 @@ function Chat() {
             />
             <div className={classes.buttonAuthor}>
                 <InputAuthorComponent
-                    value={author}
+                    value={authorName}
                     onChange={setAuthor}
                     onKeyDown={onSendMessage}
                 />

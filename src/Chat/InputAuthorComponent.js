@@ -13,6 +13,7 @@ const InputAuthorComponent = ({onChange, value, onKeyDown}) => {
     const classes = useStyles();
     return (
         <input
+            disabled
             placeholder='Ввведите автора'
             className={classes.inputAuthor}
             value={value}
