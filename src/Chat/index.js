@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
-import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
+import {useSelector, useDispatch} from 'react-redux'
+import {addMessage} from "./chatSlice";
 import '../App.css';
 import InputComponent from "./InputComponent";
 import ButtonComponent from "./ButtonComponent";
@@ -44,34 +45,39 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function Index() {
+function Chat() {
 
     const [inputMessage, setInputMessage] = useState('');
-    const [messagesArray, setMessagesArray] = useState([]);
     const [author, setAuthor] = useState('Anonymous');
 
+    const {messagesArray} = useSelector((state) => state.chat
+    );
+
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const onSendMessage = () => {
+
         if (inputMessage && author) {
-            setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: author}])
+            dispatch(addMessage({textMessage: inputMessage, author: author}))
         } else {
             console.log('Введите сообщение');
         }
-    }
+
+    };
 
     useEffect(() => {
         if (inputMessage && author) {
             setInputMessage('')
             setTimeout(function () {
                 setInputMessage('')
-                setMessagesArray(prev => [...prev, {textMessage: inputMessage, author: 'робот'}])
+                dispatch(addMessage({textMessage: inputMessage, author: 'bot'}))
             }, 1500);
         }
     }, [messagesArray])
 
     return <div className={classes.mainWrapper}>
-        <ArrayChats />
+        <ArrayChats/>
         <div className={classes.messageList}>
             {
                 messagesArray.map((message, index) => (
@@ -105,4 +111,4 @@ function Index() {
     </div>
 }
 
-export default Index;
+export default Chat;
