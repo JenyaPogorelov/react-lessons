@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     inputAuthor: {
         border: '0',
         padding: '5px',
+        backgroundColor: 'white',
     },
 }));
 

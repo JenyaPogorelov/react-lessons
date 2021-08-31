@@ -17,7 +17,6 @@ const InputComponent = ({onKeyDown, onChange, value}) => {
     const classes = useStyles();
     return (
         <TextField
-
             multiline
             maxRows={2}
             id="outlined-basic"
@@ -26,7 +25,6 @@ const InputComponent = ({onKeyDown, onChange, value}) => {
             classes={{
                 root: classes.inputArea
             }}
-
             autoFocus={true}
             value={value}
             onChange={event => onChange(event.target.value)}
