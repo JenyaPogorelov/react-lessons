@@ -48,14 +48,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Chat() {
     const urlParams = useParams();
-    const chatId = urlParams.id;
+    const chatId = +urlParams.id;
 
     const [inputMessage, setInputMessage] = useState('');
     const [author, setAuthor] = useState('Anonymous');
 
-    const {messagesArray} = useSelector((state) => state.chat);
+    const {chats} = useSelector((state) => state.chat);
+    const messagesArray = chats.find((chat) => chat.id === chatId).massagesArray;
     const {authorName} = useSelector((state) => state.profile);
-
     const classes = useStyles();
     const dispatch = useDispatch();
 
