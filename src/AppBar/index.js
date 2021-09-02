@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {AppBar as MaterialUiAppBar} from "@material-ui/core";
+import {useSelector, useDispatch} from 'react-redux';
 import {InputAdornment} from "@material-ui/core";
 import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
@@ -14,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from "@material-ui/core/TextField";
 import {AccountBox, AccountCircle} from "@material-ui/icons";
 import SearchIcon from '@material-ui/icons/Search';
+import ChatPreview from "./ChatPreview";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -42,9 +44,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "space-between",
     },
-    searchWrapper: {
-
-    },
+    searchWrapper: {},
     input: {
         "& div": {
             borderRadius: "40px",
@@ -52,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
                 padding: "10px",
             }
         },
+    },
+    chatWrapper: {
+        width: '100%',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
     },
 }));
 
@@ -65,6 +71,9 @@ const routes = [
 const AppBar = () => {
     const classes = useStyles();
     const location = useLocation();
+    const {chats} = useSelector((state) => state.chat);
+
+    console.log(chats);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -98,8 +107,8 @@ const AppBar = () => {
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
-                    anchorOrigin={{ horizontal: "left", vertical: "bottom"}}
-                    anchorPosition={{ top: 55, left: 25 }}
+                    anchorOrigin={{horizontal: "left", vertical: "bottom"}}
+                    anchorPosition={{top: 55, left: 25}}
                     anchorReference={"anchorPosition"}
                 >
                     <MenuItem
@@ -120,11 +129,17 @@ const AppBar = () => {
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position={"start"}>
-                                <SearchIcon />
+                                <SearchIcon/>
                             </InputAdornment>
                         ),
                     }}
                 />
+            </Box>
+
+            <Box className={classes.chatWrapper}>
+                {chats.map((chat) => (
+                    <ChatPreview chat={chat}/>
+                ))}
             </Box>
         </Drawer>
         // <MaterialUiAppBar className={classes.appBar} position={"static"}>
