@@ -8,6 +8,7 @@ import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
 import ArrayChats from "./ArrayChats";
+import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -46,6 +47,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Chat() {
+    const urlParams = useParams();
+    const chatId = urlParams.id;
 
     const [inputMessage, setInputMessage] = useState('');
     const [author, setAuthor] = useState('Anonymous');
@@ -77,7 +80,7 @@ function Chat() {
     }, [messagesArray])
 
     return <div className={classes.mainWrapper}>
-        <ArrayChats/>
+        {/*<ArrayChats/>*/}
         <div className={classes.messageList}>
             {
                 messagesArray.map((message, index) => (

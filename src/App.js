@@ -21,7 +21,7 @@ const App = () => {
         <div className={classes.mainWrapper}>
             <AppBar />
             <Switch>
-                <Route path="/chat">
+                <Route path="/chat/:id">
                     <Chat />
                 </Route>
                 <Route path="/playground">

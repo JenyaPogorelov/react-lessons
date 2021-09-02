@@ -5,7 +5,7 @@ import {InputAdornment} from "@material-ui/core";
 import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
 import {Typography} from "@material-ui/core";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useHistory } from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -71,9 +71,10 @@ const routes = [
 const AppBar = () => {
     const classes = useStyles();
     const location = useLocation();
+    const history = useHistory();
     const {chats} = useSelector((state) => state.chat);
 
-    console.log(chats);
+    // console.log(chats);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -138,7 +139,9 @@ const AppBar = () => {
 
             <Box className={classes.chatWrapper}>
                 {chats.map((chat) => (
-                    <ChatPreview chat={chat}/>
+                    <ChatPreview
+                        chat={chat}
+                    />
                 ))}
             </Box>
         </Drawer>

@@ -3,6 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import moment from "moment";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatPreview = ({chat}) => {
     const classes = useStyles();
+    const history = useHistory();
 
     const {avatarUrl, name, massagesArray, id} = chat;
 
@@ -56,6 +58,7 @@ const ChatPreview = ({chat}) => {
     return (
         <Box
             className={classes.mainWrapper}
+            onClick={() => history.push(`/chat/${id}`)}
         >
             <Avatar
                 alt="Remy Sharp"
