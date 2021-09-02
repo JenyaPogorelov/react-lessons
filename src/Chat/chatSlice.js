@@ -5,6 +5,7 @@ export const chatSlice = createSlice({
     name: 'chat',
     initialState: {
         messagesArray: [],
+        myId: 1,
         chats: [
             {
                 id: 2,

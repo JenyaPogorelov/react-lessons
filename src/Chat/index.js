@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-around',
     },
-
 }));
 
 function Chat() {
@@ -54,6 +53,7 @@ function Chat() {
     const [author, setAuthor] = useState('Anonymous');
 
     const {chats} = useSelector((state) => state.chat);
+    const {myId} = useSelector((state) => state.chat);
     const messagesArray = chats.find((chat) => chat.id === chatId).massagesArray;
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();

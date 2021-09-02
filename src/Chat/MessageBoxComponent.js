@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import ArrayChats from "./ArrayChats";
+import {useSelector} from "react-redux";
+
+
 
 const useStyles = makeStyles((theme) => ({
     messageBox: {
@@ -17,18 +20,23 @@ const useStyles = makeStyles((theme) => ({
         color: 'red',
         fontWeight: 'bold',
     },
-    message: {
-
+    senderMessage: {
+        alignSelf: 'flex-start',
+    },
+    userMessage: {
+        alignSelf: 'flex-end',
     },
 }));
 
 
 const MessageBoxComponent = ({message}) => {
     const classes = useStyles();
+    const {myId} = useSelector((state) => state.chat);
+    console.log(myId)
     return (
-        <div className={classes.messageBox}>
+        <div className={`${classes.messageBox} ${message.userId === myId ? classes.userMessage : classes.senderMessage}`}>
             <div className={classes.author} >{message.author}</div>
-            <div className={classes.message} >{message.textMessage}</div>
+            <div className={classes.message} >{message.text}</div>
         </div>
 
     )
