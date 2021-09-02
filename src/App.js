@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     mainWrapper: {
         width: "100vw",
         height: "100vh",
-        backgroundColor: "yellow",
+        display: "flex",
     },
 }));
 
@@ -19,7 +19,7 @@ const App = () => {
     const classes = useStyles();
     return <Router>
         <div className={classes.mainWrapper}>
-            {/*<AppBar />*/}
+            <AppBar />
             <Switch>
                 <Route path="/chat">
                     <Chat />
