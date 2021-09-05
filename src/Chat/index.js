@@ -8,7 +8,7 @@ import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
 import ArrayChats from "./ArrayChats";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -46,14 +46,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Chat() {
+    const location = useLocation();
     const urlParams = useParams();
     const chatId = +urlParams.id;
+
 
     const [inputMessage, setInputMessage] = useState('');
     const [author, setAuthor] = useState('Anonymous');
 
     const {chats} = useSelector((state) => state.chat);
-    const {myId} = useSelector((state) => state.chat);
+
+    // const {myId} = useSelector((state) => state.chat);
     const messagesArray = chats.find((chat) => chat.id === chatId).massagesArray;
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
@@ -62,7 +65,7 @@ function Chat() {
     const onSendMessage = () => {
 
         if (inputMessage && author) {
-            dispatch(addMessage({textMessage: inputMessage, author: authorName}))
+            dispatch(addMessage({chatId, inputMessage}))
         } else {
             console.log('Введите сообщение');
         }
@@ -74,7 +77,7 @@ function Chat() {
             setInputMessage('')
             setTimeout(function () {
                 setInputMessage('')
-                dispatch(addMessage({textMessage: inputMessage, author: 'bot'}))
+                dispatch(addMessage({chatId, inputMessage}))
             }, 1500);
         }
     }, [messagesArray])

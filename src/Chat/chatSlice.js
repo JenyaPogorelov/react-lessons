@@ -61,7 +61,16 @@ export const chatSlice = createSlice({
     },
     reducers: {
         addMessage: (state, action) => {
-            state.messagesArray.push(action.payload);
+            const {chatId, inputMessage} = action.payload;
+            const chatIndex = state.chats.findIndex((chat) => chat.id === chatId)
+            state.chats[chatIndex].massagesArray.push({
+                    timeStamp: moment(),
+                    userId: state.myId,
+                    text:inputMessage,
+                    isRead: false,
+            })
+
+            // state.messagesArray.push(action.payload);
         }
     },
 })
