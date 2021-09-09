@@ -83,7 +83,7 @@ const ChatPreview = ({chat}) => {
                 <Typography
                     variant={'caption'}
                 >
-                    {lastMessage.timeStamp.format('h:mm')}
+                    {lastMessage.timeStamp.format('H:mm')}
                 </Typography>
                 <Typography
                     variant={'subtitle1'}
