@@ -31,11 +31,14 @@ const useStyles = makeStyles((theme) => ({
 
 const MessageBoxComponent = ({message}) => {
     const classes = useStyles();
-    const {myId} = useSelector((state) => state.chat);
-    // console.log(myId)
+    const {myId, chats} = useSelector((state) => state.chat);
+    const chatIndex = chats.findIndex((chat) => chat.id === message.userId)
+    // console.log("myId", myId)
+    // console.log("message.userId", message.userId)
+    // console.log("chatIndex", chatIndex)
     return (
         <div className={`${classes.messageBox} ${message.userId === myId ? classes.userMessage : classes.senderMessage}`}>
-            <div className={classes.author} >{message.author}</div>
+            <div className={classes.author} >{chatIndex !== -1 ? chats[chatIndex].name : ''}</div>
             <div className={classes.message} >{message.text}</div>
         </div>
 

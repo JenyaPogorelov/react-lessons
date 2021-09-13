@@ -67,15 +67,14 @@ function Chat() {
         const {chat} = getState();
         const myId = chat.myId
         dispatch(addMessage(message))
+        setInputMessage('')
         if (message.authorId === myId) {
             const botMessage = {
-                // timeStamp: moment(),
                 chatId: chatId,
                 inputMessage: "I'm robot",
                 authorId: chatId,
             };
             setTimeout(function () {
-                setInputMessage('')
                 dispatch(addMessage(botMessage));
             }, 1500);
 
@@ -89,16 +88,6 @@ function Chat() {
             console.log('Введите сообщение');
         }
     };
-
-    // useEffect(() => {
-    //     if (inputMessage && author) {
-    //         setInputMessage('')
-    //         setTimeout(function () {
-    //             setInputMessage('')
-    //             dispatch(addMessage({chatId, inputMessage}))
-    //         }, 1500);
-    //     }
-    // }, [messagesArray])
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}
