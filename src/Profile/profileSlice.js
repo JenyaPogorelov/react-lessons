@@ -9,14 +9,11 @@ export const profileSlice = createSlice({
     reducers: {
         addAuthor: (state, action) => {
             state.authorName = action.payload;
-            // console.log(action.payload)
-            // console.log(state.authorName)
 
         }
     },
 })
 
-// Action creators are generated for each case reducer function
 export const {addAuthor} = profileSlice.actions
 
 export default profileSlice.reducer

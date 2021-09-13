@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector, useDispatch} from 'react-redux';
 import {addMessage} from "./chatSlice";
@@ -7,8 +7,9 @@ import InputComponent from "./InputComponent";
 import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
-import ArrayChats from "./ArrayChats";
-import {useLocation, useParams} from "react-router-dom";
+// import ArrayChats from "./ArrayChats";
+import {useParams} from "react-router-dom";
+// import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Chat() {
-    const location = useLocation();
+    // const location = useLocation();
     const urlParams = useParams();
     const chatId = +urlParams.id;
 
@@ -56,31 +57,48 @@ function Chat() {
 
     const {chats} = useSelector((state) => state.chat);
 
-    // const {myId} = useSelector((state) => state.chat);
+    const {myId} = useSelector((state) => state.chat);
     const messagesArray = chats.find((chat) => chat.id === chatId).massagesArray;
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const onSendMessage = () => {
+    const sendMessageWithThunk = (message) => (dispatch, getState) => {
+        const {chat} = getState();
+        const myId = chat.myId
+        dispatch(addMessage(message))
+        if (message.authorId === myId) {
+            const botMessage = {
+                // timeStamp: moment(),
+                chatId: chatId,
+                inputMessage: "I'm robot",
+                authorId: chatId,
+            };
+            setTimeout(function () {
+                setInputMessage('')
+                dispatch(addMessage(botMessage));
+            }, 1500);
 
+        }
+    };
+
+    const onSendMessage = () => {
         if (inputMessage && author) {
-            dispatch(addMessage({chatId, inputMessage}))
+            dispatch(sendMessageWithThunk({chatId, inputMessage, authorId: myId}))
         } else {
             console.log('Введите сообщение');
         }
-
     };
 
-    useEffect(() => {
-        if (inputMessage && author) {
-            setInputMessage('')
-            setTimeout(function () {
-                setInputMessage('')
-                dispatch(addMessage({chatId, inputMessage}))
-            }, 1500);
-        }
-    }, [messagesArray])
+    // useEffect(() => {
+    //     if (inputMessage && author) {
+    //         setInputMessage('')
+    //         setTimeout(function () {
+    //             setInputMessage('')
+    //             dispatch(addMessage({chatId, inputMessage}))
+    //         }, 1500);
+    //     }
+    // }, [messagesArray])
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}

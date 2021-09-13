@@ -2,7 +2,6 @@ import Box from '@material-ui/core/Box';
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import moment from "moment";
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

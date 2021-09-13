@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const MessageBoxComponent = ({message}) => {
     const classes = useStyles();
     const {myId} = useSelector((state) => state.chat);
-    console.log(myId)
+    // console.log(myId)
     return (
         <div className={`${classes.messageBox} ${message.userId === myId ? classes.userMessage : classes.senderMessage}`}>
             <div className={classes.author} >{message.author}</div>

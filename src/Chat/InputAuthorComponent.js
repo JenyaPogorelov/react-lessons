@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import ButtonComponent from "./ButtonComponent";
 
 const useStyles = makeStyles((theme) => ({
     inputAuthor: {

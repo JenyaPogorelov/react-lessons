@@ -61,11 +61,11 @@ export const chatSlice = createSlice({
     },
     reducers: {
         addMessage: (state, action) => {
-            const {chatId, inputMessage} = action.payload;
+            const {chatId, inputMessage, authorId} = action.payload;
             const chatIndex = state.chats.findIndex((chat) => chat.id === chatId)
             state.chats[chatIndex].massagesArray.push({
                     timeStamp: moment(),
-                    userId: state.myId,
+                    userId: authorId,
                     text:inputMessage,
                     isRead: false,
             })

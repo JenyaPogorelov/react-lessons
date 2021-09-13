@@ -24,7 +24,6 @@ const Profile = () => {
 
         if (author) {
             dispatch(addAuthor(author))
-            // console.log('test')
         } else {
             console.log('Авторизуйтесь');
         }
