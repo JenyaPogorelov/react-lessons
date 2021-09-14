@@ -117,14 +117,21 @@ const AppBar = () => {
                         onClick={() => history.push('/cats')}
                     >
                         Коты
-                    </MenuItem>                    <MenuItem
+                    </MenuItem>
+                    <MenuItem
                         key={2}
+                        onClick={() => history.push('/got')}
+                    >
+                        Игра престолов
+                    </MenuItem>
+                    <MenuItem
+                        key={3}
                         onClick={() => history.push('/profile')}
                     >
                         Профиль
                     </MenuItem>
                     <MenuItem
-                        key={3}
+                        key={4}
                     >
                         Настройки
                     </MenuItem>
