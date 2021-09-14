@@ -5,6 +5,7 @@ import Playground from "./Playground";
 import AppBar from "./AppBar";
 import Profile from "./Profile";
 import {makeStyles} from '@material-ui/core/styles';
+import Cats from "./Cats";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -26,6 +27,9 @@ const App = () => {
                 </Route>
                 <Route path="/playground">
                     <Playground />
+                </Route>
+                <Route path="/cats">
+                    <Cats />
                 </Route>
                 <Route path="/profile">
                     <Profile />

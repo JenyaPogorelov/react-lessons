@@ -5,7 +5,7 @@ import {InputAdornment} from "@material-ui/core";
 // import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
 // import {Typography} from "@material-ui/core";
-// import {useLocation, useHistory } from "react-router-dom";
+import {useLocation, useHistory } from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -61,17 +61,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// const routes = [
-//     {pathTitle: 'Home', path: '/'},
-//     {pathTitle: 'Chat', path: '/Chat'},
-//     {pathTitle: 'Playground', path: '/playground'},
-//     {pathTitle: 'Profile', path: '/profile'},
-// ];
+const routes = [
+    {pathTitle: 'Home', path: '/'},
+    {pathTitle: 'Chat', path: '/Chat'},
+    {pathTitle: 'Playground', path: '/playground'},
+    {pathTitle: 'Profile', path: '/profile'},
+    {pathTitle: 'Cats', path: '/cats'},
+
+];
 
 const AppBar = () => {
     const classes = useStyles();
     // const location = useLocation();
-    // const history = useHistory();
+    const history = useHistory();
     const {chats} = useSelector((state) => state.chat);
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -112,11 +114,17 @@ const AppBar = () => {
                 >
                     <MenuItem
                         key={1}
+                        onClick={() => history.push('/cats')}
+                    >
+                        Коты
+                    </MenuItem>                    <MenuItem
+                        key={2}
+                        onClick={() => history.push('/profile')}
                     >
                         Профиль
                     </MenuItem>
                     <MenuItem
-                        key={2}
+                        key={3}
                     >
                         Настройки
                     </MenuItem>
