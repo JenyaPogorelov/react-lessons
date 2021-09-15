@@ -2,6 +2,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import {CircularProgress} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {useSelector, useDispatch} from 'react-redux';
+import {GOT_API_URL, setData, setError, setLoading} from "./gotSlice";
+import {useCallback, useEffect} from "react";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,18 +17,18 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
     },
     imageWrapper: {
-        width: "450px",
-        minHeight: "600px",
+        minHeight: "650px",
+        minWidth: "600px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
     },
     infoWrapper: {
-        margin: "10px 0 10px 0",
+        padding: "10px 0px 0px 10px",
+        margin: "10px 0 15px 0",
         width: "450px",
-        height: "100%",
-        backgroundColor: "blue",
+        height: "150px",
+        backgroundColor: "lightblue",
         display: "flex",
         flexDirection: "column",
 
@@ -34,9 +36,30 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-// const getGotPhoto = () => async (dispatch, getState) => {
-//
-// };
+const getGotPhoto = () => async (dispatch, getState) => {
+    const {
+        got: {data, loading, error}
+    } = getState();
+    console.log("GOT")
+    if (!loading) {
+        try {
+            dispatch(setError(false));
+            dispatch(setLoading(true));
+            const response = await fetch(GOT_API_URL);
+            if (!response.ok) {
+                throw new Error("Something went wrong");
+            }
+            const result = await response.json();
+            dispatch(setData(result));
+        } catch (e) {
+            dispatch(setError(true));
+        } finally {
+            dispatch(setLoading(false));
+        }
+
+    }
+
+};
 
 
 const Got = () => {
@@ -44,14 +67,37 @@ const Got = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const {data, loading, error} = useSelector(state => state.got);
+    let id = (Math.random() * (52 - 0) + 0).toFixed(0)
 
-    // console.log(data, loading, error);
-    console.log((Math.random() * (52 - 0) + 0).toFixed(0))
+    const getThunkGgotPhoto = useCallback(
+        () => dispatch(getGotPhoto()),
+        [dispatch]
+    );
+
+    useEffect(() => {
+        getThunkGgotPhoto();
+    }, [getThunkGgotPhoto])
+
     return <div className={classes.wrapper}>
         <div className={classes.imageWrapper}>
+            {loading && <CircularProgress/>}
+            {error && <div>Возникла ошибка</div>}
 
+            {!loading && !error && data && (
+                <img className={classes.catImg} src={data[id].imageUrl} alt="GOT" />
+            )}
         </div>
         <div className={classes.infoWrapper}>
+            {!loading && !error && data && (
+                <>
+                    <div>First Name: {data[id].firstName}</div>
+                    <div>Last Name:  {data[id].lastName}</div>
+                    <div>Full Name:  {data[id].fullName}</div>
+                    <div>Title:      {data[id].title}</div>
+                    <div>Family:     {data[id].family}</div>
+                </>
+
+            )}
 
         </div>
 
@@ -59,7 +105,7 @@ const Got = () => {
             variant={'contained'}
             color={'primary'}
             disabled={loading}
-            // onClick={}
+            onClick={() => getThunkGgotPhoto()}
         >
             Слудеющий герой
         </Button>
