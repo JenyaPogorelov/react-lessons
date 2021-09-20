@@ -2,13 +2,18 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {changeIsAuth} from "../Chat/chatSlice";
 import {Link} from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+// import {authFirebase} from "../Firebase";
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import firebase from "firebase/compat";
 
 export const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const dispatch = useDispatch();
+
+    const firebaseApp = firebase.apps[0];
 
     const handlePassChange = (e) => {
         setPassword(e.target.value);
@@ -23,12 +28,12 @@ export const Signup = () => {
         setError("");
 
         const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
-                // const user = userCredential.user;
-                // dispatch(changeIsAuth(true));
-                // console.log(user);
+                const user = userCredential.user;
+                dispatch(changeIsAuth(true));
+                console.log(user);
             })
             .catch((error) => {
                 setError(error.message);
@@ -66,6 +71,10 @@ export const Signup = () => {
                     Already have an account? <Link to="/login">Sign in</Link>
                 </p>
             </form>
+
+            <code>
+                <pre>{JSON.stringify(firebaseApp.options, null, 2)}</pre>
+            </code>
         </div>
     );
 };
