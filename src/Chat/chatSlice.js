@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import moment from "moment";
 
 export const chatSlice = createSlice({
@@ -6,6 +6,7 @@ export const chatSlice = createSlice({
     initialState: {
         messagesArray: [],
         myId: 1,
+        isAuthenticated: false,
         chats: [
             {
                 id: 2,
@@ -64,18 +65,21 @@ export const chatSlice = createSlice({
             const {chatId, inputMessage, authorId} = action.payload;
             const chatIndex = state.chats.findIndex((chat) => chat.id === chatId)
             state.chats[chatIndex].massagesArray.push({
-                    timeStamp: moment(),
-                    userId: authorId,
-                    text:inputMessage,
-                    isRead: false,
+                timeStamp: moment(),
+                userId: authorId,
+                text: inputMessage,
+                isRead: false,
             })
 
             // state.messagesArray.push(action.payload);
+        },
+        changeIsAuth: (state, action) => {
+            state.isAuthenticated = action.payload;
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {addMessage} = chatSlice.actions
+export const {addMessage, changeIsAuth} = chatSlice.actions
 
 export default chatSlice.reducer
