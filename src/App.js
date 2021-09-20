@@ -23,12 +23,14 @@ const useStyles = makeStyles((theme) => ({
  const firebaseConfig = {
     apiKey: "AIzaSyA_BWAjxbUtDjuR12oGYH0GnD6WPNMcdtk",
     authDomain: "react-project-655fe.firebaseapp.com",
+    databaseURL: "https://react-project-655fe-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "react-project-655fe",
     storageBucket: "react-project-655fe.appspot.com",
     messagingSenderId: "8418339955",
     appId: "1:8418339955:web:5461b66c23e283dacf8e06"
 };
 firebase.initializeApp(firebaseConfig);
+export const db = firebase.database();
 
 const App = () => {
     const classes = useStyles();

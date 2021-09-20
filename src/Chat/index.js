@@ -1,15 +1,14 @@
 import React, {useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector, useDispatch} from 'react-redux';
-import {addMessage} from "./chatSlice";
 import '../App.css';
 import InputComponent from "./InputComponent";
 import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
-// import ArrayChats from "./ArrayChats";
 import {useParams} from "react-router-dom";
-// import moment from "moment";
+import {sendMessageWithThunk} from './actions'
+
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -63,23 +62,7 @@ function Chat() {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const sendMessageWithThunk = (message) => (dispatch, getState) => {
-        const {chat} = getState();
-        const myId = chat.myId
-        dispatch(addMessage(message))
-        setInputMessage('')
-        if (message.authorId === myId) {
-            const botMessage = {
-                chatId: chatId,
-                inputMessage: "I'm robot",
-                authorId: chatId,
-            };
-            setTimeout(function () {
-                dispatch(addMessage(botMessage));
-            }, 1500);
 
-        }
-    };
 
     const onSendMessage = () => {
         if (inputMessage && author) {
