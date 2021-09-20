@@ -4,16 +4,11 @@ import CustomRoute from "./util/CustomRoute";
 import Chat from "./Chat";
 import Playground from "./Playground";
 import {Signup} from "./Auth/Signup";
+import {Login} from "./Auth/Login";
 import Profile from "./Profile";
 import {makeStyles} from '@material-ui/core/styles';
 import Cats from "./Cats";
 import Got from "./GameOfThrones";
-import {useEffect} from "react";
-// import firebase from "firebase/app";
-// import firebase from "firebase/compat";
-// import {initializeApp} from "firebase/app";
-import {initializeApp} from "firebase/firebase-app";
-// import {firebaseConfig} from "./Firebase";
 import firebase from "firebase/compat";
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +40,7 @@ const App = () => {
                 <CustomRoute secured path="/chat/:id">
                     <Chat/>
                 </CustomRoute>
-                <CustomRoute path="/playground" secured withAppBar={false}>
+                <CustomRoute path="/playground" secured withAppBar={true}>
                     <Playground/>
                 </CustomRoute>
                 <CustomRoute path="/cats" secured>
@@ -58,6 +53,9 @@ const App = () => {
                     <Profile/>
                 </CustomRoute>
 
+                <Route path="/login">
+                    <Login/>
+                </Route>
                 <Route path="/signup">
                     <Signup/>
                 </Route>
