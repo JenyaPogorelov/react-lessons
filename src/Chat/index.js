@@ -81,9 +81,6 @@ function Chat() {
     //     }
     // });
 
-    useEffect(() => {
-        dispatch(initMessageTracking());
-    }, [dispatch]);
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}
