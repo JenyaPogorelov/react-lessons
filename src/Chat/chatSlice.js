@@ -119,16 +119,25 @@ export const chatSlice = createSlice({
                 text: inputMessage,
                 isRead: false,
             })
-
             // state.messagesArray.push(action.payload);
         },
+
+        setMessages: (state, action) => {
+            const {chatId, messages} = action.payload
+            state.messages = {
+                ...state.messages,
+                [chatId]: messages,
+            }
+            console.log(state.messages, "state.messages");
+        },
+
         changeIsAuth: (state, action) => {
             state.isAuthenticated = action.payload;
-        }
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {addMessage, changeIsAuth} = chatSlice.actions
+export const {addMessage, setMessages, changeIsAuth} = chatSlice.actions
 
 export default chatSlice.reducer
