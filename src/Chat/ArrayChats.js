@@ -67,8 +67,8 @@ const ArrayChats = (props) => {
         const nameChat = prompt('Введите название чата', 'default')
         const getLastId = chatList[chatList.length - 1].id + 1;
         setChatList(prevState => [...prevState, {id: getLastId, textMessage: 'inputMessage', author: nameChat, nameRoom: nameChat},])
-        console.log(nameRoom)
-        console.log(pathName)
+        // console.log(nameRoom)
+        // console.log(pathName)
     }
 
 

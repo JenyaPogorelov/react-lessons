@@ -54,10 +54,12 @@ function Chat() {
     const [inputMessage, setInputMessage] = useState('');
     const [author, setAuthor] = useState('Anonymous');
 
-    const {chats} = useSelector((state) => state.chat);
+    const {messages} = useSelector((state) => state.chat);
 
     const {myId} = useSelector((state) => state.chat);
-    const messagesArray = chats.find((chat) => chat.id === chatId).massagesArray;
+
+    // const messagesArray = messages.find((chat) => chat.id === chatId).massagesArray;
+    const messagesArray = messages[chatId];
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();

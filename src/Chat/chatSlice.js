@@ -128,7 +128,7 @@ export const chatSlice = createSlice({
                 ...state.messages,
                 [chatId]: messages,
             }
-            console.log(state.messages, "state.messages");
+            // console.log(state.messages, "state.messages");
         },
 
         changeIsAuth: (state, action) => {

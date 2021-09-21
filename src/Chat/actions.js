@@ -28,7 +28,7 @@ export const sendMessageWithThunk = (message) => (dispatch, getState) => {
 };
 
 export const addMessageWithFirebase = (chatId, message) => async () => {
-    console.log(message);
+    // console.log(message);
     db.ref("messages").child(chatId).child(message.id).set(message);
 };
 
