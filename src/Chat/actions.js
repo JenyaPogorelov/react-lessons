@@ -1,6 +1,6 @@
-import {addMessage} from "./chatSlice";
-import firebase from "firebase/compat";
-import {common} from "@material-ui/core/colors";
+// import {addMessage} from "./chatSlice";
+// import firebase from "firebase/compat";
+// import {common} from "@material-ui/core/colors";
 import {db} from '../App'
 
 
@@ -10,7 +10,7 @@ export const sendMessageWithThunk = (message) => (dispatch, getState) => {
     const chatId = message.chatId;
     const messages = chat.messages[chatId] || []
 
-    console.log(messages);
+    // console.log(messages);
 
     dispatch(addMessageWithFirebase(chatId, {
             ...message,
@@ -20,23 +20,20 @@ export const sendMessageWithThunk = (message) => (dispatch, getState) => {
 };
 
 export const addMessageWithFirebase = (chatId, message) => async () => {
+    console.log(message);
     db.ref("messages").child(chatId).child(message.id).set(message);
 };
 
-// export const initMessageTracking = () => (dispatch) => {
-//     db.ref("messages").on("child_changed", (snapshot) => {
-//         const payload = getPayloadFromSnapshot(snapshot);
-//         dispatch({
-//             type: CHANGE_MESSAGES,
-//             payload,
-//         });
-//     });
-//
-//     db.ref("messages").on("child_added", (snapshot) => {
-//         const payload = getPayloadFromSnapshot(snapshot);
-//         dispatch({
-//             type: CHANGE_MESSAGES,
-//             payload,
-//         });
-//     });
-// };
+export const initMessageTracking = () => (dispatch) => {
+    db.ref("messages").on("child_changed", (snapshot) => {
+
+        console.log(snapshot);
+
+    });
+
+    db.ref("messages").on("child_added", (snapshot) => {
+
+        console.log(snapshot);
+
+    });
+};

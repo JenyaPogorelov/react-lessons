@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector, useDispatch} from 'react-redux';
 import '../App.css';
@@ -7,7 +7,7 @@ import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
 import {useParams} from "react-router-dom";
-import {sendMessageWithThunk} from './actions'
+import {sendMessageWithThunk, initMessageTracking} from './actions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +71,17 @@ function Chat() {
             console.log('Введите сообщение');
         }
     };
+
+    //  Прокрутка в низ, надо настроить.  //
+    // useEffect(() => {
+    //     if (document.getElementsByClassName("messageList")[0]) {
+    //         document.getElementsByClassName("messageList")[0].scrollTop = 999999;
+    //     }
+    // });
+
+    useEffect(() => {
+        dispatch(initMessageTracking());
+    }, [dispatch]);
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}
