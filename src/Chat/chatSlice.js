@@ -5,6 +5,7 @@ export const chatSlice = createSlice({
     name: 'chat',
     initialState: {
         messagesArray: [],
+        myUid: '',
         myId: 1,
         isAuthenticated: false,
         chats: [
@@ -134,10 +135,14 @@ export const chatSlice = createSlice({
         changeIsAuth: (state, action) => {
             state.isAuthenticated = action.payload;
         },
+
+        setMyUid: (state, action) => {
+            state.myUid = action.payload;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {addMessage, setMessages, changeIsAuth} = chatSlice.actions
+export const {addMessage, setMessages, changeIsAuth, setMyUid} = chatSlice.actions
 
 export default chatSlice.reducer

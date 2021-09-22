@@ -10,6 +10,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Cats from "./Cats";
 import Got from "./GameOfThrones";
 import firebase from "firebase/compat";
+import {useAuthState} from 'react-firebase-hooks/auth';
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
- const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyA_BWAjxbUtDjuR12oGYH0GnD6WPNMcdtk",
     authDomain: "react-project-655fe.firebaseapp.com",
     databaseURL: "https://react-project-655fe-default-rtdb.europe-west1.firebasedatabase.app",
@@ -34,6 +35,14 @@ export const db = firebase.database();
 
 const App = () => {
     const classes = useStyles();
+
+    const [user, loading] = useAuthState(firebase.auth());
+
+    if (loading) {
+        return <div>Loading</div>
+    }
+
+    console.log(user, 'user');
 
     return <Router>
         <div className={classes.mainWrapper}>
