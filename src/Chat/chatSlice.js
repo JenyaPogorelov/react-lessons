@@ -96,17 +96,18 @@ export const chatSlice = createSlice({
                 },
             ],
         },
-        profiles: [
-            {
-                id: 2,
-                name: "Joe Doe",
-                avatar: "https://material-ui.com/static/images/avatar/1.jpg",
-            },
-            {
-                id: 3,
-                name: "Иван Кузнецов",
-                avatar: "https://material-ui.com/static/images/avatar/2.jpg",
-            },
+        chatsId: [
+            // {
+            //     id: 2,
+            //     name: "Joe Doe",
+            //     avatar: "https://material-ui.com/static/images/avatar/1.jpg",
+            // },
+            // {
+            //     id: 3,
+            //     name: "Иван Кузнецов",
+            //     avatar: "https://material-ui.com/static/images/avatar/2.jpg",
+            // },
+            'nvWXVUu8vycpmvcPZUTz2VqB7tE3',
         ],
 
     },

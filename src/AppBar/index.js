@@ -5,7 +5,7 @@ import {InputAdornment} from "@material-ui/core";
 // import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
 // import {Typography} from "@material-ui/core";
-import {useLocation, useHistory } from "react-router-dom";
+import {useLocation, useHistory} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -16,6 +16,7 @@ import TextField from "@material-ui/core/TextField";
 // import {AccountBox, AccountCircle} from "@material-ui/icons";
 import SearchIcon from '@material-ui/icons/Search';
 import ChatPreview from "./ChatPreview";
+import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -74,7 +75,7 @@ const AppBar = () => {
     const classes = useStyles();
     // const location = useLocation();
     const history = useHistory();
-    const {chats} = useSelector((state) => state.chat);
+    const {chats, messages, chatsId, myUid} = useSelector((state) => state.chat);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -87,7 +88,11 @@ const AppBar = () => {
         setAnchorEl(null);
     };
 
-    // const pathName = location.pathname;
+    const [uId, setUid] = useState('');
+
+    const onAddChat = () => {
+
+    };
 
     return (
         <Drawer
@@ -151,27 +156,22 @@ const AppBar = () => {
             </Box>
 
             <Box className={classes.chatWrapper}>
-                {chats.map((chat) => (
+                {chatsId.map((uid) => (
                     <ChatPreview
-                        key={chat.id}
-                        chat={chat}
+                        // key={chat.id}
+                        // chat={chat}
+                        // profile={profile}
+                        uid={uid}
+                        // messages={messages[profile.id] || []}
                     />
                 ))}
             </Box>
+            <Box>
+                <TextField value={uId} onChange={e => setUid(e.target.value)}/>
+                <Button onClick={onAddChat()}> Добавить </Button>
+            </Box>
         </Drawer>
-        // <MaterialUiAppBar className={classes.appBar} position={"static"}>
-        //     <Toolbar>
-        //         {routes.map((route) => (
-        //             <Link
-        //                 key={route.path}
-        //                 to={route.path} className={`${classes.link} ${route.path === pathName ? classes.currentLink : ''}`}>
-        //                 <Typography variant='h6'>
-        //                     {route.pathTitle}
-        //                 </Typography>
-        //             </Link>
-        //         ))}
-        //     </Toolbar>
-        // </MaterialUiAppBar>
+
     );
 }
 

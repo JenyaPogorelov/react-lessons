@@ -19,7 +19,7 @@ export const Signup = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [user, loading] = useAuthState(firebase.auth());
+    // const [user, loading] = useAuthState(firebase.auth());
 
     const firebaseApp = firebase.apps[0];
 

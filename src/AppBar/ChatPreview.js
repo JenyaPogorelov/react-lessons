@@ -2,7 +2,9 @@ import Box from '@material-ui/core/Box';
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
+import {db} from "../App";
+import {useObjectVal} from "react-firebase-hooks/database";
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
@@ -39,60 +41,78 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const ChatPreview = ({chat}) => {
+const ChatPreview = ({uid}) => {
     const classes = useStyles();
     const history = useHistory();
+    const location = useLocation();
 
-    const {avatarUrl, name, massagesArray, id} = chat;
+    // const {avatarUrl, name, massagesArray, id} = chat;
 
-    const lastMessage = massagesArray.length > 0 ? massagesArray[massagesArray.length - 1] : {text: '', timeStamp: null};
+    const [snapshot, loading, error] = useObjectVal(db.ref('profiles').child(uid));
 
-    const unreadMessagesCount = massagesArray.reduce((acc, message) => {
-        if (message.userId === id && !message.isRead) {
-            acc++;
-        }
-        return acc;
-    }, 0)
+    if (loading) {
+        return <div>Loading</div>
+    }
 
-    return (
-        <Box
-            className={classes.mainWrapper}
-            onClick={() => history.push(`/chat/${id}`)}
-        >
-            <Avatar
-                alt="Remy Sharp"
-                src={avatarUrl}/>
+    if (error) {
+        return <div>Error</div>
+    }
 
-            <Box className={classes.middleContentWrapper}>
-                <Typography
-                    variant={'h6'}
-                    className={classes.overFlowText}
-                >
-                    {name}
-                </Typography>
-                <Typography
-                    variant={'subtitle1'}
-                    className={classes.overFlowText}
-                >
-                    {lastMessage.text}
-                </Typography>
+    if (snapshot) {
+        console.log(snapshot);
+
+        const {name, surName} = snapshot;
+
+        const locationSplitted = location.pathname.split('/');
+
+        const isSelected =
+            locationSplitted[1] === 'chat' && locationSplitted[2] === uid;
+
+        // const lastMessage = massagesArray.length > 0 ? massagesArray[massagesArray.length - 1] : {text: '', timeStamp: null};
+
+
+        return (
+            <Box
+                className={classes.mainWrapper}
+                onClick={() => history.push(`/chat/${uid}`)}
+            >
+                <Avatar
+                    alt="Remy Sharp"
+                    src={null}/>
+
+                <Box className={classes.middleContentWrapper}>
+                    <Typography
+                        variant={'h6'}
+                        className={classes.overFlowText}
+                    >
+                        {name} {surName}
+                    </Typography>
+                    <Typography
+                        variant={'subtitle1'}
+                        className={classes.overFlowText}
+                    >
+                        {/*{lastMessage.text}*/}
+                    </Typography>
+                </Box>
+
+                <Box className={classes.rightContentWrapper}>
+                    <Typography
+                        variant={'caption'}
+                    >
+                        {/*{lastMessage.timeStamp.format('H:mm')}*/}
+                    </Typography>
+                    <Typography
+                        variant={'subtitle1'}
+                    >
+                        {/*{unreadMessagesCount > 0 && unreadMessagesCount}*/}
+                    </Typography>
+                </Box>
             </Box>
 
-            <Box className={classes.rightContentWrapper}>
-                <Typography
-                    variant={'caption'}
-                >
-                    {lastMessage.timeStamp.format('H:mm')}
-                </Typography>
-                <Typography
-                    variant={'subtitle1'}
-                >
-                    {unreadMessagesCount > 0 && unreadMessagesCount}
-                </Typography>
-            </Box>
-        </Box>
+        )
+    }
 
-    )
-}
+    return null;
+};
 
 export default ChatPreview
