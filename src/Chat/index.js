@@ -48,7 +48,10 @@ const useStyles = makeStyles((theme) => ({
 function Chat() {
     // const location = useLocation();
     const urlParams = useParams();
-    const chatId = +urlParams.id;
+    const chats = useSelector((state) => state.chat.chats);
+    const targetProfile = Object.keys(chats).find(profileId => profileId)
+
+    const chatId = targetProfile ? Number.parseInt(urlParams.id) : null;
 
 
     const [inputMessage, setInputMessage] = useState('');
@@ -63,8 +66,6 @@ function Chat() {
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();
-
-
 
     const onSendMessage = () => {
         if (inputMessage && author) {
@@ -81,6 +82,11 @@ function Chat() {
     //     }
     // });
 
+    if (!targetProfile) {
+        return <div>Нет собеседника</div>
+    }
+
+    // const chatId = targetProfile.chatId;
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}

@@ -59,48 +59,48 @@ export const chatSlice = createSlice({
             //         },
             //     ],
             // }
-            nvWXVUu8vycpmvcPZUTz2VqB7tE3: {
-                chatId: ''
-            },
-            DU70o9nFEqTb9cVKc1FBRzn0Tde2: {
-                chatId: ''
-            },
+            // nvWXVUu8vycpmvcPZUTz2VqB7tE3: {
+            //     chatId: ''
+            // },
+            // DU70o9nFEqTb9cVKc1FBRzn0Tde2: {
+            //     chatId: ''
+            // },
         },
         messages: {
-            2: [
-                {
-                    timeStamp: moment("1995-12-17T03:21:00").valueOf(),
-                    authorId: 1,
-                    text: "Привет",
-                },
-                {
-                    timeStamp: moment("1995-12-17T03:24:00").valueOf(),
-                    authorId: 2,
-                    text: "Тебе тоже привет Joe, Тебе тоже привет Joe, Тебе тоже привет Joe, Тебе тоже привет Joe",
-                },
-            ],
-            3: [
-                {
-                    timeStamp: moment("1995-12-17T03:24:00").valueOf(),
-                    authorId: 1,
-                    text: "Привет",
-                },
-                {
-                    timeStamp: moment("1995-12-17T03:28:00").valueOf(),
-                    authorId: 3,
-                    text: "Тебе тоже привет Иван",
-                },
-                {
-                    timeStamp: moment("1995-12-17T03:28:00").valueOf(),
-                    authorId: 3,
-                    text: "Тебе тоже привет Иван",
-                },
-                {
-                    timeStamp: moment("1995-12-17T03:28:00").valueOf(),
-                    authorId: 3,
-                    text: "Тебе тоже привет Иван",
-                },
-            ],
+            // 2: [
+            //     {
+            //         timeStamp: moment("1995-12-17T03:21:00").valueOf(),
+            //         authorId: 1,
+            //         text: "Привет",
+            //     },
+            //     {
+            //         timeStamp: moment("1995-12-17T03:24:00").valueOf(),
+            //         authorId: 2,
+            //         text: "Тебе тоже привет Joe, Тебе тоже привет Joe, Тебе тоже привет Joe, Тебе тоже привет Joe",
+            //     },
+            // ],
+            // 3: [
+            //     {
+            //         timeStamp: moment("1995-12-17T03:24:00").valueOf(),
+            //         authorId: 1,
+            //         text: "Привет",
+            //     },
+            //     {
+            //         timeStamp: moment("1995-12-17T03:28:00").valueOf(),
+            //         authorId: 3,
+            //         text: "Тебе тоже привет Иван",
+            //     },
+            //     {
+            //         timeStamp: moment("1995-12-17T03:28:00").valueOf(),
+            //         authorId: 3,
+            //         text: "Тебе тоже привет Иван",
+            //     },
+            //     {
+            //         timeStamp: moment("1995-12-17T03:28:00").valueOf(),
+            //         authorId: 3,
+            //         text: "Тебе тоже привет Иван",
+            //     },
+            // ],
         },
         chatsId: {
             // {

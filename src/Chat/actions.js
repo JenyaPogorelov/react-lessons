@@ -18,7 +18,7 @@ export const sendMessageWithThunk = (message) => (dispatch, getState) => {
     const chatId = message.chatId;
     const messages = chat.messages[chatId] || []
 
-    // console.log(messages);
+    // if (
 
     dispatch(addMessageWithFirebase(chatId, {
             ...message,
