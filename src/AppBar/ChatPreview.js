@@ -59,7 +59,6 @@ const ChatPreview = ({uid}) => {
     }
 
     if (snapshot) {
-        console.log(snapshot);
 
         const {name, surName} = snapshot;
 

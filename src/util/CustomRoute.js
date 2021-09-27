@@ -3,6 +3,7 @@ import {Route, Redirect} from "react-router-dom"
 import AppBar from "../AppBar";
 import {useEffect} from "react";
 import {initMessageTracking} from "../Chat/actions";
+import {initChatTracking} from "../AppBar/actions";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from "firebase/compat";
 import {setMyUid, changeIsAuth} from "../Chat/chatSlice";
@@ -20,6 +21,12 @@ const CustomRoute = ({secured, children, withAppBar = true, ...rest}) => {
     useEffect(() => {
         dispatch(initMessageTracking());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (myUid) {
+           dispatch(initChatTracking(myUid));
+        }
+    }, [myUid, dispatch]);
 
     if (user && !myUid) {
         dispatch(setMyUid(user.uid));

@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from '@material-ui/icons/Search';
 import ChatPreview from "./ChatPreview";
 import {Button} from "@material-ui/core";
+import {addChatToFirebase} from "./actions";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -91,7 +92,7 @@ const AppBar = () => {
     const [uId, setUid] = useState('');
 
     const onAddChat = () => {
-
+        addChatToFirebase(myUid, uId)
     };
 
     return (
@@ -156,9 +157,9 @@ const AppBar = () => {
             </Box>
 
             <Box className={classes.chatWrapper}>
-                {chatsId.map((uid) => (
+                {Object.keys(chats).map((uid) => (
                     <ChatPreview
-                        // key={chat.id}
+                        key={uid}
                         // chat={chat}
                         // profile={profile}
                         uid={uid}
@@ -168,7 +169,7 @@ const AppBar = () => {
             </Box>
             <Box>
                 <TextField value={uId} onChange={e => setUid(e.target.value)}/>
-                <Button onClick={onAddChat()}> Добавить </Button>
+                <Button onClick={onAddChat}> Добавить </Button>
             </Box>
         </Drawer>
 

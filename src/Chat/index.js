@@ -59,7 +59,7 @@ function Chat() {
     const {myId} = useSelector((state) => state.chat);
 
     // const messagesArray = messages.find((chat) => chat.id === chatId).massagesArray;
-    const messagesArray = messages[chatId];
+    const messagesArray = messages[chatId] || [];
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();
