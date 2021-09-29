@@ -33,7 +33,7 @@ const MessageBoxComponent = ({message}) => {
     const classes = useStyles();
     const {myId, chats} = useSelector((state) => state.chat);
     const chatIndex = chats.findIndex((chat) => chat.id === message.userId)
-    // console.log(message, 'message');
+    console.log(message, 'message');
     // console.log("myId", myId)
     // console.log("message.userId", message.userId)
     // console.log("chatIndex", chatIndex)

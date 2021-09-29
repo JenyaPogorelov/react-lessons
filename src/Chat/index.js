@@ -48,10 +48,11 @@ const useStyles = makeStyles((theme) => ({
 function Chat() {
     // const location = useLocation();
     const urlParams = useParams();
+    const targetUid = urlParams.id;
     const chats = useSelector((state) => state.chat.chats);
-    const targetProfile = Object.keys(chats).find(profileId => profileId)
+    const targetProfileID = Object.keys(chats).find(profileId => profileId)
 
-    const chatId = targetProfile ? Number.parseInt(urlParams.id) : null;
+    const chatId = chats[targetProfileID] ? chats[targetProfileID].chatId : null;
 
 
     const [inputMessage, setInputMessage] = useState('');
@@ -59,21 +60,29 @@ function Chat() {
 
     const {messages} = useSelector((state) => state.chat);
 
-    const {myId} = useSelector((state) => state.chat);
+    const {myUid} = useSelector((state) => state.chat);
 
     // const messagesArray = messages.find((chat) => chat.id === chatId).massagesArray;
-    const messagesArray = messages[chatId] || [];
+    const messagesArray = messages[chats] || [];
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const onSendMessage = () => {
         if (inputMessage && author) {
-            dispatch(sendMessageWithThunk({chatId, inputMessage, authorId: myId}))
+            console.log(myUid, "TEST")
+            dispatch(sendMessageWithThunk({
+                chatId,
+                inputMessage,
+                authorUid: myUid,
+                targetUid: targetUid
+            })
+            );
         } else {
             console.log('Введите сообщение');
         }
     };
+    console.log(messagesArray, 'messagesArray')
 
     //  Прокрутка в низ, надо настроить.  //
     // useEffect(() => {
@@ -82,7 +91,7 @@ function Chat() {
     //     }
     // });
 
-    if (!targetProfile) {
+    if (!targetProfileID || !chatId) {
         return <div>Нет собеседника</div>
     }
 

@@ -6,7 +6,7 @@ export const chatSlice = createSlice({
     initialState: {
         messagesArray: [],
         myUid: '',
-        myId: 1,
+        // myId: 1,
         isAuthenticated: false,
         chats: {
             // {
@@ -102,31 +102,33 @@ export const chatSlice = createSlice({
             //     },
             // ],
         },
-        chatsId: {
-            // {
-            //     id: 2,
-            //     name: "Joe Doe",
-            //     avatar: "https://material-ui.com/static/images/avatar/1.jpg",
-            // },
-            // {
-            //     id: 3,
-            //     name: "Иван Кузнецов",
-            //     avatar: "https://material-ui.com/static/images/avatar/2.jpg",
-            // },
-            nvWXVUu8vycpmvcPZUTz2VqB7tE3: {
-                chatId: ''
-            },
-            DU70o9nFEqTb9cVKc1FBRzn0Tde2: {
-                chatId: ''
-            },
-            // 'heY2nmnCCxgkZRUhPkpCdssbOSt2',
-        },
+        // chatsId: {
+        //     // {
+        //     //     id: 2,
+        //     //     name: "Joe Doe",
+        //     //     avatar: "https://material-ui.com/static/images/avatar/1.jpg",
+        //     // },
+        //     // {
+        //     //     id: 3,
+        //     //     name: "Иван Кузнецов",
+        //     //     avatar: "https://material-ui.com/static/images/avatar/2.jpg",
+        //     // },
+        //     nvWXVUu8vycpmvcPZUTz2VqB7tE3: {
+        //         chatId: ''
+        //     },
+        //     DU70o9nFEqTb9cVKc1FBRzn0Tde2: {
+        //         chatId: ''
+        //     },
+        //     // 'heY2nmnCCxgkZRUhPkpCdssbOSt2',
+        // },
 
     },
     reducers: {
         addMessage: (state, action) => {
             const {chatId, inputMessage, authorId} = action.payload;
             const chatIndex = state.chats.findIndex((chat) => chat.id === chatId)
+            console.log(chatId, inputMessage, authorId);
+            console.log(action.payload);
             state.chats[chatIndex].massagesArray.push({
                 timeStamp: moment(),
                 userId: authorId,
@@ -164,6 +166,6 @@ export const chatSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {addMessage, setMessages, changeIsAuth, setMyUid, setChat} = chatSlice.actions
+export const {setMessages, changeIsAuth, setMyUid, setChat} = chatSlice.actions
 
 export default chatSlice.reducer
