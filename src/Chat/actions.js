@@ -18,8 +18,6 @@ export const sendMessageWithThunk = (message) => async (dispatch, getState) => {
     const messages = chat.messages[chatId] || []
 
     if (messages.length === 0) {
-        console.log(message.targetUid, 'messages.targetUid');
-        console.log(message.authorUid, 'messages.authorUid');
         await addChatToFirebase(message.targetUid, message.authorUid)
     }
 

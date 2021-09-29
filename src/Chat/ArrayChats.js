@@ -53,8 +53,6 @@ const ArrayChats = (props) => {
     const classes = useStyles();
     const query = useQuery();
     const nameRoom = query.get('room');
-    const location = useLocation();
-    const pathName = location.pathname;
 
     const deleteChat = (event) => {
         const delIndex = chatList.filter((element, index) => index !== +event);

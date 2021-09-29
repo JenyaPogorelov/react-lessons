@@ -12,26 +12,26 @@ const getPayloadFromSnapshot = (snapshot) => {
     //     messages.push(mes.val());
     // });
 
-    console.log(snapshot.val(), 'VAL')
+
 
     return {[snapshot.key]: snapshot.val()}
 
     // return {chatId: snapshot.key, messages}
 }
 
-export const addChatsToThunk = (message) => (dispatch, getState) => {
-    const {chat} = getState();
-    const chatId = message.chatId;
-    const messages = chat.messages[chatId] || []
-
-    // console.log(messages);
-
-    // dispatch(addMessageWithFirebase(chatId, {
-    //         ...message,
-    //         id: `${chatId}-${messages?.length || 0}-${Date.now()}`
-    //     })
-    // );
-};
+// export const addChatsToThunk = (message) => (dispatch, getState) => {
+//     const {chat} = getState();
+//     const chatId = message.chatId;
+//     const messages = chat.messages[chatId] || []
+//
+//     // console.log(messages);
+//
+//     // dispatch(addMessageWithFirebase(chatId, {
+//     //         ...message,
+//     //         id: `${chatId}-${messages?.length || 0}-${Date.now()}`
+//     //     })
+//     // );
+// };
 
 const generateChatId = (uidA, uidB) => {
     if (uidA > uidB) {
@@ -42,7 +42,6 @@ const generateChatId = (uidA, uidB) => {
 
 export const addChatToFirebase = async (myUid, targetUid) => {
     const profile = db.ref('profiles').child(targetUid).get();
-    console.log('PROFILE', profile);
     if (profile) {
         await db
             .ref("chats")

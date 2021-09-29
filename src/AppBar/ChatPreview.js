@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {db} from "../App";
 import {useObjectVal} from "react-firebase-hooks/database";
 
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const ChatPreview = ({uid}) => {
     const classes = useStyles();
     const history = useHistory();
-    const location = useLocation();
+    // const location = useLocation();
 
     // const {avatarUrl, name, massagesArray, id} = chat;
 
@@ -62,10 +62,10 @@ const ChatPreview = ({uid}) => {
 
         const {name, surName} = snapshot;
 
-        const locationSplitted = location.pathname.split('/');
+        // const locationSplitted = location.pathname.split('/');
 
-        const isSelected =
-            locationSplitted[1] === 'chat' && locationSplitted[2] === uid;
+        // const isSelected =
+        //     locationSplitted[1] === 'chat' && locationSplitted[2] === uid;
 
         // const lastMessage = massagesArray.length > 0 ? massagesArray[massagesArray.length - 1] : {text: '', timeStamp: null};
 

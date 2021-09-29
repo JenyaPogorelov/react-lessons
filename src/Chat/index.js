@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector, useDispatch} from 'react-redux';
 import '../App.css';
@@ -7,7 +7,7 @@ import ButtonComponent from "./ButtonComponent";
 import MessageBoxComponent from "./MessageBoxComponent";
 import InputAuthorComponent from "./InputAuthorComponent";
 import {useParams} from "react-router-dom";
-import {sendMessageWithThunk, initMessageTracking} from './actions'
+import {sendMessageWithThunk} from './actions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Chat() {
-    // const location = useLocation();
     const urlParams = useParams();
     const targetUid = urlParams.id;
     const chats = useSelector((state) => state.chat.chats);
@@ -62,15 +61,13 @@ function Chat() {
 
     const {myUid} = useSelector((state) => state.chat);
 
-    // const messagesArray = messages.find((chat) => chat.id === chatId).massagesArray;
-    const messagesArray = messages[chats] || [];
+    const messagesArray = messages[chatId] || [];
     const {authorName} = useSelector((state) => state.profile);
     const classes = useStyles();
     const dispatch = useDispatch();
 
     const onSendMessage = () => {
         if (inputMessage && author) {
-            console.log(myUid, "TEST")
             dispatch(sendMessageWithThunk({
                 chatId,
                 inputMessage,
@@ -78,11 +75,11 @@ function Chat() {
                 targetUid: targetUid
             })
             );
+            setInputMessage('');
         } else {
             console.log('Введите сообщение');
         }
     };
-    console.log(messagesArray, 'messagesArray')
 
     //  Прокрутка в низ, надо настроить.  //
     // useEffect(() => {
@@ -95,7 +92,6 @@ function Chat() {
         return <div>Нет собеседника</div>
     }
 
-    // const chatId = targetProfile.chatId;
 
     return <div className={classes.mainWrapper}>
         {/*<ArrayChats/>*/}

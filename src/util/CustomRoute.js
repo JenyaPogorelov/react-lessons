@@ -11,12 +11,10 @@ import {setMyUid, changeIsAuth} from "../Chat/chatSlice";
 const CustomRoute = ({secured, children, withAppBar = true, ...rest}) => {
     const {isAuthenticated, myUid} = useSelector((state) => state.chat);
 
-    const [user, loading, error] = useAuthState(firebase.auth());
+    const [user] = useAuthState(firebase.auth());
 
     const dispatch = useDispatch();
 
-
-    // console.log(isAuthenticated, "IS AUTH");
 
     useEffect(() => {
         dispatch(initMessageTracking());

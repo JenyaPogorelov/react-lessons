@@ -2,13 +2,8 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {changeIsAuth} from "../Chat/chatSlice";
 import {Link, useHistory} from "react-router-dom";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import firebase from "firebase/compat";
 import {db} from "../App";
-import {useAuthState} from 'react-firebase-hooks/auth';
-
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-// import {authFirebase} from "../Firebase";
 
 export const Signup = () => {
     const [email, setEmail] = useState("");
@@ -19,9 +14,7 @@ export const Signup = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // const [user, loading] = useAuthState(firebase.auth());
 
-    const firebaseApp = firebase.apps[0];
 
     const handlePassChange = (e) => {
         setPassword(e.target.value);

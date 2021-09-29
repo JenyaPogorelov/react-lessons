@@ -42,8 +42,6 @@ const App = () => {
         return <div>Loading</div>
     }
 
-    console.log(user, 'user');
-
     return <Router>
         <div className={classes.mainWrapper}>
             {/*<AppBar />*/}

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const getCatPhoto = () => async (dispatch, getState) => {
     const {
-        cats: {data, loading, error}
+        cats: {loading}
     } = getState();
 
     if (!loading) {

@@ -127,8 +127,8 @@ export const chatSlice = createSlice({
         addMessage: (state, action) => {
             const {chatId, inputMessage, authorId} = action.payload;
             const chatIndex = state.chats.findIndex((chat) => chat.id === chatId)
-            console.log(chatId, inputMessage, authorId);
-            console.log(action.payload);
+            // console.log(chatId, inputMessage, authorId);
+            // console.log(action.payload);
             state.chats[chatIndex].massagesArray.push({
                 timeStamp: moment(),
                 userId: authorId,

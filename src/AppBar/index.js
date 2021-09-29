@@ -1,11 +1,8 @@
 import {useState} from "react";
-// import {AppBar as MaterialUiAppBar} from "@material-ui/core";
 import {useSelector} from 'react-redux';
 import {InputAdornment} from "@material-ui/core";
-// import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
-// import {Typography} from "@material-ui/core";
-import {useLocation, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from "@material-ui/core/TextField";
-// import {AccountBox, AccountCircle} from "@material-ui/icons";
 import SearchIcon from '@material-ui/icons/Search';
 import ChatPreview from "./ChatPreview";
 import {Button} from "@material-ui/core";
@@ -63,20 +59,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const routes = [
-    {pathTitle: 'Home', path: '/'},
-    {pathTitle: 'Chat', path: '/Chat'},
-    {pathTitle: 'Playground', path: '/playground'},
-    {pathTitle: 'Profile', path: '/profile'},
-    {pathTitle: 'Cats', path: '/cats'},
-
-];
+// const routes = [
+//     {pathTitle: 'Home', path: '/'},
+//     {pathTitle: 'Chat', path: '/Chat'},
+//     {pathTitle: 'Playground', path: '/playground'},
+//     {pathTitle: 'Profile', path: '/profile'},
+//     {pathTitle: 'Cats', path: '/cats'},
+//
+// ];
 
 const AppBar = () => {
     const classes = useStyles();
-    // const location = useLocation();
     const history = useHistory();
-    const {chats, messages, chatsId, myUid} = useSelector((state) => state.chat);
+    const {chats, myUid} = useSelector((state) => state.chat);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);

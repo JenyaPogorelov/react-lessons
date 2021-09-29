@@ -12,7 +12,7 @@ export const Login = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    console.log(getAuth().currentUser, 'LOGIN');
+    // console.log(getAuth().currentUser, 'LOGIN');
 
     const handlePassChange = (e) => {
         setPassword(e.target.value);
