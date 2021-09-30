@@ -4,34 +4,8 @@ import {setChat} from "../Chat/chatSlice";
 import {db} from '../App'
 
 const getPayloadFromSnapshot = (snapshot) => {
-    // const messages = [];
-    //
-    // const chats = [];
-    //
-    // snapshot.forEach((mes) => {
-    //     messages.push(mes.val());
-    // });
-
-
-
     return {[snapshot.key]: snapshot.val()}
-
-    // return {chatId: snapshot.key, messages}
 }
-
-// export const addChatsToThunk = (message) => (dispatch, getState) => {
-//     const {chat} = getState();
-//     const chatId = message.chatId;
-//     const messages = chat.messages[chatId] || []
-//
-//     // console.log(messages);
-//
-//     // dispatch(addMessageWithFirebase(chatId, {
-//     //         ...message,
-//     //         id: `${chatId}-${messages?.length || 0}-${Date.now()}`
-//     //     })
-//     // );
-// };
 
 const generateChatId = (uidA, uidB) => {
     if (uidA > uidB) {
