@@ -7,7 +7,7 @@ const getPayloadFromSnapshot = (snapshot) => {
     return {[snapshot.key]: snapshot.val()}
 }
 
-const generateChatId = (uidA, uidB) => {
+export const generateChatId = (uidA, uidB) => {
     if (uidA > uidB) {
         return `${uidA}-${uidB}`;
     }
