@@ -1,9 +1,9 @@
 import {Link, useHistory} from "react-router-dom";
 import firebase from "firebase/compat";
+import {getAuth} from "firebase/auth";
 import {useState} from "react";
 import {changeIsAuth} from "../Chat/chatSlice";
 import {useDispatch} from "react-redux";
-
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -11,6 +11,8 @@ export const Login = () => {
     const [error, setError] = useState("");
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // console.log(getAuth().currentUser, 'LOGIN');
 
     const handlePassChange = (e) => {
         setPassword(e.target.value);
@@ -59,7 +61,7 @@ export const Login = () => {
                     {error && <p>{error}</p>}
                     <button type="submit">Login</button>
                 </div>
-                <hr />
+                <hr/>
                 <p>
                     Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>

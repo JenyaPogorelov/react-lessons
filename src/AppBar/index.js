@@ -1,11 +1,8 @@
 import {useState} from "react";
-// import {AppBar as MaterialUiAppBar} from "@material-ui/core";
 import {useSelector} from 'react-redux';
 import {InputAdornment} from "@material-ui/core";
-// import {Toolbar} from "@material-ui/core";
 import Box from '@material-ui/core/Box';
-// import {Typography} from "@material-ui/core";
-import {useLocation, useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,9 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from "@material-ui/core/TextField";
-// import {AccountBox, AccountCircle} from "@material-ui/icons";
 import SearchIcon from '@material-ui/icons/Search';
 import ChatPreview from "./ChatPreview";
+import {Button} from "@material-ui/core";
+import {addChatToFirebase} from "./actions";
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -61,20 +59,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const routes = [
-    {pathTitle: 'Home', path: '/'},
-    {pathTitle: 'Chat', path: '/Chat'},
-    {pathTitle: 'Playground', path: '/playground'},
-    {pathTitle: 'Profile', path: '/profile'},
-    {pathTitle: 'Cats', path: '/cats'},
-
-];
+// const routes = [
+//     {pathTitle: 'Home', path: '/'},
+//     {pathTitle: 'Chat', path: '/Chat'},
+//     {pathTitle: 'Playground', path: '/playground'},
+//     {pathTitle: 'Profile', path: '/profile'},
+//     {pathTitle: 'Cats', path: '/cats'},
+//
+// ];
 
 const AppBar = () => {
     const classes = useStyles();
-    // const location = useLocation();
     const history = useHistory();
-    const {chats} = useSelector((state) => state.chat);
+    const {chats, myUid} = useSelector((state) => state.chat);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -87,7 +84,11 @@ const AppBar = () => {
         setAnchorEl(null);
     };
 
-    // const pathName = location.pathname;
+    const [uId, setUid] = useState('');
+
+    const onAddChat = () => {
+        addChatToFirebase(myUid, uId)
+    };
 
     return (
         <Drawer
@@ -151,27 +152,22 @@ const AppBar = () => {
             </Box>
 
             <Box className={classes.chatWrapper}>
-                {chats.map((chat) => (
+                {Object.keys(chats).map((uid) => (
                     <ChatPreview
-                        key={chat.id}
-                        chat={chat}
+                        key={uid}
+                        // chat={chat}
+                        // profile={profile}
+                        uid={uid}
+                        // messages={messages[profile.id] || []}
                     />
                 ))}
             </Box>
+            <Box>
+                <TextField value={uId} onChange={e => setUid(e.target.value)}/>
+                <Button onClick={onAddChat}> Добавить </Button>
+            </Box>
         </Drawer>
-        // <MaterialUiAppBar className={classes.appBar} position={"static"}>
-        //     <Toolbar>
-        //         {routes.map((route) => (
-        //             <Link
-        //                 key={route.path}
-        //                 to={route.path} className={`${classes.link} ${route.path === pathName ? classes.currentLink : ''}`}>
-        //                 <Typography variant='h6'>
-        //                     {route.pathTitle}
-        //                 </Typography>
-        //             </Link>
-        //         ))}
-        //     </Toolbar>
-        // </MaterialUiAppBar>
+
     );
 }
 

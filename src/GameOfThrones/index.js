@@ -38,9 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 const getGotPhoto = () => async (dispatch, getState) => {
     const {
-        got: {data, loading, error}
+        got: {loading}
     } = getState();
-    console.log("GOT")
     if (!loading) {
         try {
             dispatch(setError(false));

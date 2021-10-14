@@ -1,6 +1,5 @@
-import {addMessage, setMessages} from "./chatSlice";
-// import firebase from "firebase/compat";
-// import {common} from "@material-ui/core/colors";
+import {setMessages} from "./chatSlice";
+import {addChatToFirebase} from "../AppBar/actions";
 import {db} from '../App'
 
 const getPayloadFromSnapshot = (snapshot) => {
@@ -10,15 +9,17 @@ const getPayloadFromSnapshot = (snapshot) => {
         messages.push(mes.val());
     });
 
-    return { chatId: snapshot.key, messages }
+    return {chatId: snapshot.key, messages}
 }
 
-export const sendMessageWithThunk = (message) => (dispatch, getState) => {
+export const sendMessageWithThunk = (message) => async (dispatch, getState) => {
     const {chat} = getState();
     const chatId = message.chatId;
     const messages = chat.messages[chatId] || []
 
-    // console.log(messages);
+    if (messages.length === 0) {
+        await addChatToFirebase(message.targetUid, message.authorUid)
+    }
 
     dispatch(addMessageWithFirebase(chatId, {
             ...message,
@@ -28,7 +29,6 @@ export const sendMessageWithThunk = (message) => (dispatch, getState) => {
 };
 
 export const addMessageWithFirebase = (chatId, message) => async () => {
-    // console.log(message);
     db.ref("messages").child(chatId).child(message.id).set(message);
 };
 
